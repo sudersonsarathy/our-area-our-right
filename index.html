@@ -1,0 +1,589 @@
+<title>Our Area Our Rights</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --paper: #EEF1EE;
+    --paper-raised: #FFFFFF;
+    --ink: #1A2420;
+    --ink-soft: #4E5A55;
+    --ink-faint: #7B8580;
+    --line: #D3D9D4;
+    --navy: #1F3A5F;
+    --navy-soft: #E4EAF1;
+    --brass: #8C6A26;
+    --brass-soft: #F1E7D0;
+
+    --status-received-fg: #1F5C52;
+    --status-received-bg: #DCEEE9;
+    --status-pending-fg: #9A5209;
+    --status-pending-bg: #F5E4CC;
+    --status-drafted-fg: #5B564F;
+    --status-drafted-bg: #E7E3DA;
+    --status-critical-fg: #8C2A1B;
+    --status-critical-bg: #F5DCD5;
+
+    --shadow: 0 1px 2px rgba(26,36,32,0.06), 0 1px 1px rgba(26,36,32,0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12181A;
+      --paper-raised: #1B2225;
+      --ink: #E7EAE6;
+      --ink-soft: #ABB5AF;
+      --ink-faint: #7A847E;
+      --line: #2E3735;
+      --navy: #8FB2DA;
+      --navy-soft: #223244;
+      --brass: #D9B36A;
+      --brass-soft: #3A311E;
+
+      --status-received-fg: #6FCBB9;
+      --status-received-bg: #17322C;
+      --status-pending-fg: #E8A855;
+      --status-pending-bg: #3A2A12;
+      --status-drafted-fg: #B7B0A4;
+      --status-drafted-bg: #2A2823;
+      --status-critical-fg: #E4897A;
+      --status-critical-bg: #3A1D17;
+
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.24);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #12181A;
+    --paper-raised: #1B2225;
+    --ink: #E7EAE6;
+    --ink-soft: #ABB5AF;
+    --ink-faint: #7A847E;
+    --line: #2E3735;
+    --navy: #8FB2DA;
+    --navy-soft: #223244;
+    --brass: #D9B36A;
+    --brass-soft: #3A311E;
+
+    --status-received-fg: #6FCBB9;
+    --status-received-bg: #17322C;
+    --status-pending-fg: #E8A855;
+    --status-pending-bg: #3A2A12;
+    --status-drafted-fg: #B7B0A4;
+    --status-drafted-bg: #2A2823;
+    --status-critical-fg: #E4897A;
+    --status-critical-bg: #3A1D17;
+
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.24);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--navy); }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  header.masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .masthead-title {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4.5vw, 40px);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .masthead-title img {
+    height: 1em;
+    width: auto;
+    flex: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .masthead-title img { filter: invert(1); }
+  }
+  :root[data-theme="dark"] .masthead-title img { filter: invert(1); }
+
+  .masthead-sub {
+    margin: 6px 0 0;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 46ch;
+  }
+
+  .masthead-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+
+  .stat {
+    background: var(--paper-raised);
+    padding: 16px 18px;
+  }
+
+  .stat-num {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    font-variant-numeric: tabular-nums;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .stat-label {
+    margin-top: 6px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-faint);
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .record {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--navy);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+
+  .record.critical { border-left-color: var(--status-critical-fg); }
+  .record.drafted { border-left-color: var(--ink-faint); }
+
+  .record-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .record-no {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  .record-title {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 2px 0 8px;
+    text-wrap: balance;
+  }
+
+  .pill {
+    flex: none;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .pill.received { color: var(--status-received-fg); background: var(--status-received-bg); }
+  .pill.pending { color: var(--status-pending-fg); background: var(--status-pending-bg); }
+  .pill.drafted { color: var(--status-drafted-fg); background: var(--status-drafted-bg); }
+  .pill.critical { color: var(--status-critical-fg); background: var(--status-critical-bg); }
+
+  .record-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .record-meta b { color: var(--ink); font-weight: 600; }
+
+  .record-ref {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--navy);
+    margin-top: 8px;
+  }
+
+  .onground {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--brass-soft);
+    border-radius: 5px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .onground b { color: var(--brass); }
+
+  details {
+    margin-top: 12px;
+  }
+  summary {
+    cursor: pointer;
+    font-size: 12.5px;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  summary:focus-visible, a:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+  }
+  .petition-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 65ch;
+  }
+
+  .record-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 520px) {
+    .masthead-meta { text-align: left; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1 class="masthead-title"><img src="fist-icon.png" alt="">Our Area Our Rights</h1>
+      <p class="masthead-sub">Civic complaints filed by "Our Area, Our Right" &mdash; open to residents of any area, no boundary. Non-partisan; time-bound follow-up on every complaint.</p>
+    </div>
+    <div class="masthead-meta">
+      Last checked<br>13&nbsp;Sep&nbsp;2026</div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">17</div><div class="stat-label">Total filed</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-label">CM Helpline</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Unresolved 5+ yrs</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Cleared on-ground</div></div>
+  </div>
+
+  <p class="section-label">Records, newest first</p>
+
+  <!-- 17 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 17 &middot; 13 Sep 2026</div>
+        <h2 class="record-title">Drainage Leakage at &ldquo;Cake Point,&rdquo; Soosaiya Nagar</h2>
+      </div>
+      <span class="pill received">Resolved on-ground</span>
+    </div>
+    <div class="record-meta"><b>Channel:</b> Direct resident escalation, no portal filing needed &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Reported by:</b> a resident, Soosaiya Nagar</div>
+    <div class="onground"><b>Update (13 Sep):</b> Reported directly to the premises staff and to a neighbour, who called and had the leak cleared the same morning &mdash; no formal CM Helpline complaint required.</div>
+  </div>
+
+  <!-- 16 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 16 &middot; 12 Sep 2026</div>
+        <h2 class="record-title">Sewage Pumping Station Proposed Inside Judges Colony Park (OSR Land) - Relocation Sought, Ward 18, Thiruverkadu</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 1 PDF (4 RTI replies of Thiruverkadu Municipality)</div>
+    <div class="record-ref">Grievance ID #19075234</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012452931663" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 15 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 15 &middot; 3 Sep 2026</div>
+        <h2 class="record-title">Persistent Water Leakage and Removal of Garbage Bin on Perumal Koil Street, Noombal</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu</div>
+    <div class="record-ref">Grievance ID #18987432</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012412777670" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 14 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 14 &middot; 31 Aug 2026</div>
+        <h2 class="record-title">Worst Condition Of Road due to metro water pipeline installation and no road being laid - Oil Mill Road (A N Ezhumalai Salai), Iyyapanthangal</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Iyyapanthangal Village Panchayat</div>
+    <div class="record-ref">Grievance ID #18932978</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/myarea" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 13 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 13 &middot; 31 Aug 2026</div>
+        <h2 class="record-title">Prolonged Disrepair of Mettu Road Near Sneha Marriage Mandapam, Thiruverkadu Municipality</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
+    <div class="record-ref">Grievance ID #18932861</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012390233356" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 12 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 12 &middot; 26 Aug 2026</div>
+        <h2 class="record-title">Incomplete Storm Water Drainage Leaving Worst-Affected Houses Unconnected, Judges Colony, Thiruverkadu</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
+    <div class="record-ref">Grievance ID #18896113</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/myarea" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 11 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 11 &middot; 26 Aug 2026</div>
+        <h2 class="record-title">Absence of Street Name Boards in Interior Roads, Judges Colony, Thiruverkadu</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
+    <div class="record-ref">Grievance ID #18895931</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012371984092" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 10 &middot; 19 Aug 2026</div>
+        <h2 class="record-title">Procedural Lapse in Site Selection - Pumping Station 7/11 UGSS, Judges Colony Park, Noombal</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> Email &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
+    <div class="record-ref">N/A - email complaint (no reference number issued)</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 09 &middot; 19 Aug 2026</div>
+        <h2 class="record-title">Uncollected solid waste &mdash; Sri Devi Nagar, Kattupakkam</h2>
+      </div>
+      <span class="pill received">Accepted</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Kattupakkam Village Panchayat &middot; <b>Dept:</b> Rural Development &amp; Panchayat Raj</div>
+    <div class="record-ref">Grievance ID #18812981</div>
+    <div class="onground"><b>Update (12 Sep):</b> Portal status moved from Received to Accepted &mdash; consistent with the Poonamallee BDO's office confirming by phone on 19-Aug that the waste was cleared.</div>
+    <details>
+      <summary>Petition text</summary>
+      <p class="petition-text">Solid waste has been left uncollected for weeks at Sri Devi Nagar, Kattupakkam Village Panchayat, causing unhygienic conditions and health hazards to residents. This is a public nuisance under Sections 270 and 279 of the Bharatiya Nyaya Sanhita 2023, and waste management within the panchayat is a statutory duty under the Tamil Nadu Panchayats Act 1994. We request the Block Development Officer to arrange immediate clearance and regular collection within 7 days of this petition.</p>
+    </details>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012335061492" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 08 &middot; 17 Aug 2026</div>
+        <h2 class="record-title">Uncleared garbage &mdash; Poolakshmi St &amp; MSG Road, Susai Nagar</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Dept:</b> Municipal Admin &amp; Water Supply</div>
+    <div class="record-ref">Grievance ID #18779567</div>
+    <details>
+      <summary>Petition text</summary>
+      <p class="petition-text">Garbage has been left uncleared for over two weeks on Poolakshmi Street and MSG Road, Susai Nagar, Thiruverkadu, causing foul odour and health hazards to residents. This is a public nuisance under Sections 270 and 279 of the Bharatiya Nyaya Sanhita 2023, and street cleanliness/waste management within municipal limits is a statutory duty of the Municipal Council under Section 162 of the Tamil Nadu District Municipalities Act 1920. We request the Commissioner, Thiruverkadu Municipality, to arrange immediate clearance and regular collection within 7 days of this petition.</p>
+    </details>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012322248122" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 07 &middot; 16 Aug 2026</div>
+        <h2 class="record-title">Road disrepair &mdash; Judges Colony Link Road &amp; 2nd Road</h2>
+      </div>
+      <span class="pill received">Accepted</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 1 photo</div>
+    <div class="record-ref">Grievance ID #18774704</div>
+    <div class="onground"><b>Update (28 Aug):</b> Portal status moved from Received to Accepted.</div>
+    <details>
+      <summary>Petition text</summary>
+      <p class="petition-text">The roads at Judges Colony Link Road and 2nd Road, under Thiruverkadu Municipality, have remained in a severely damaged condition for over a year, causing continuous hardship and safety risk to residents. Despite the passage of significant time, no Municipal Engineer has visited the site to assess or initiate repair works. Under the Tamil Nadu District Municipalities Act 1920, Section 61, these streets vest in the Municipal Council, and Section 162 casts a clear statutory duty on the Council to maintain and repair such streets. The continued neglect also raises public safety concerns actionable under Sections 270, 279 and 280 of the Bharatiya Nyaya Sanhita 2023. We request the Commissioner, Thiruverkadu Municipality, to depute Engineering staff for immediate inspection and to undertake time-bound restoration of both roads within 30 days of this petition.</p>
+    </details>
+  </div>
+
+  <!-- 6 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 06 &middot; 16 Aug 2026</div>
+        <h2 class="record-title">Stray dogs &amp; pigs &mdash; road safety hazard, Moogambigai Nagar</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
+    <div class="record-ref">Grievance ID #18772307</div>
+    <a class="record-link" href="https://cmhelpline.tnega.org/portal/en/ticket/35665012319504230" target="_blank" rel="noopener">View on CM Helpline &rarr;</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 05 &middot; 15 Aug 2026</div>
+        <h2 class="record-title">Road &ndash; BT, never laid in 5+ years (escalation)</h2>
+      </div>
+      <span class="pill received">Accepted</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Kattupakkam Village Panchayat &middot; <b>Dept:</b> Rural Development &amp; Panchayat Raj</div>
+    <div class="record-ref">Grievance ID #18769965 &middot; cites unresolved #17638563</div>
+    <div class="onground"><b>Update (12 Sep):</b> Portal status moved to Accepted &mdash; consistent with the Panchayat official's 28-Aug call confirming measurements taken for road laying.</div>
+    <p class="petition-text" style="margin-top:10px;">Escalation citing five-plus years of disrepair and inaction by the local Ward Councillor / Panchayat President on the original grievance below.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="record critical">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 04 &middot; pre-existing</div>
+        <h2 class="record-title">Sri Devi Nagar road &mdash; never properly laid, 5+ years</h2>
+      </div>
+      <span class="pill critical">Unresolved</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; Originally filed before this ledger began, no resolution to date</div>
+    <div class="record-ref">Grievance ID #17638563</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="record drafted">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 03 &middot; 14 Aug 2026</div>
+        <h2 class="record-title">Maladministration complaint &mdash; sewer leak, Thiruverkadu</h2>
+      </div>
+      <span class="pill drafted">Drafted</span>
+    </div>
+    <div class="record-meta"><b>Channel:</b> TN Local Bodies Ombudsman (email only) &middot; ombudsmanlocal@tn.gov.in</div>
+    <div class="record-ref">No reference yet &mdash; not confirmed sent</div>
+    <p class="petition-text" style="margin-top:10px;">Cross-cites Grievance #18764409 and TNPCB Complaint 142656429.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 02 &middot; 14 Aug 2026</div>
+        <h2 class="record-title">Water pollution &mdash; sewage stagnating on public road</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> Tamil Nadu Pollution Control Board &middot; Poolakshmi Street, Susai Nagar, Noombal</div>
+    <div class="record-ref">Complaint ID 142656429</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="record">
+    <div class="record-top">
+      <div>
+        <div class="record-no">No. 01 &middot; 14 Aug 2026</div>
+        <h2 class="record-title">Sewer pipeline major damage &amp; leakage, Poolakshmi Street</h2>
+      </div>
+      <span class="pill received">Filed</span>
+    </div>
+    <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 2 photos + 1 video</div>
+    <div class="record-ref">Grievance ID #18764409</div>
+  </div>
+
+  <footer>
+    Status shown is the last-checked value from each portal, not live. &ldquo;Filed&rdquo; means submitted and awaiting action; live resolution status is checked individually on request.
+  </footer>
+
+</div>
