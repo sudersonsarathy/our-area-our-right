@@ -178,6 +178,104 @@
     color: var(--ink-faint);
   }
 
+  .areas-intro {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .area-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--navy);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .area-card.statewide {
+    border-top-color: var(--brass);
+  }
+
+  .area-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .area-card-name {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .area-card-district {
+    flex: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .area-card-dept {
+    margin: 4px 0 12px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .area-card-localities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .locality-tag {
+    font-size: 12px;
+    color: var(--navy);
+    background: var(--navy-soft);
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .area-card.statewide .locality-tag {
+    color: var(--brass);
+    background: var(--brass-soft);
+  }
+
+  .area-card-stat {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .area-card-num {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--navy);
+    font-variant-numeric: tabular-nums;
+    margin-right: 6px;
+  }
+
   .section-label {
     display: flex;
     align-items: center;
@@ -331,6 +429,82 @@
     <div class="stat"><div class="stat-num">14</div><div class="stat-label">CM Helpline</div></div>
     <div class="stat"><div class="stat-num">2</div><div class="stat-label">Unresolved 5+ yrs</div></div>
     <div class="stat"><div class="stat-num">2</div><div class="stat-label">Cleared on-ground</div></div>
+  </div>
+
+  <p class="section-label">Areas we cover</p>
+  <p class="areas-intro">Filed so far across four local bodies in two districts &mdash; and growing. We take on any area regardless of boundary; this is simply where the paper trail already runs.</p>
+
+  <div class="area-grid">
+    <div class="area-card">
+      <div class="area-card-head">
+        <h3 class="area-card-name">Thiruverkadu Municipality</h3>
+        <span class="area-card-district">Tiruvallur District</span>
+      </div>
+      <p class="area-card-dept">Municipal Administration &amp; Water Supply Dept</p>
+      <div class="area-card-localities">
+        <span class="locality-tag">Noombal</span>
+        <span class="locality-tag">Poolakshmi Street</span>
+        <span class="locality-tag">Soosaiya Nagar</span>
+        <span class="locality-tag">Moogambigai Nagar</span>
+        <span class="locality-tag">Judges Colony</span>
+        <span class="locality-tag">Mettu Road</span>
+        <span class="locality-tag">Perumal Koil Street</span>
+      </div>
+      <div class="area-card-stat"><span class="area-card-num">10</span> petitions filed</div>
+    </div>
+
+    <div class="area-card">
+      <div class="area-card-head">
+        <h3 class="area-card-name">Kattupakkam Village Panchayat</h3>
+        <span class="area-card-district">Tiruvallur District</span>
+      </div>
+      <p class="area-card-dept">Rural Development &amp; Panchayat Raj Dept</p>
+      <div class="area-card-localities">
+        <span class="locality-tag">Sri Devi Nagar</span>
+      </div>
+      <div class="area-card-stat"><span class="area-card-num">5</span> petitions filed &middot; 2 RTIs</div>
+    </div>
+
+    <div class="area-card">
+      <div class="area-card-head">
+        <h3 class="area-card-name">Ayyappanthangal Village Panchayat</h3>
+        <span class="area-card-district">Kancheepuram District</span>
+      </div>
+      <p class="area-card-dept">Rural Development &amp; Panchayat Raj Dept</p>
+      <div class="area-card-localities">
+        <span class="locality-tag">Iyyapanthangal</span>
+        <span class="locality-tag">Oil Mill Road</span>
+      </div>
+      <div class="area-card-stat"><span class="area-card-num">1</span> petition filed</div>
+    </div>
+
+    <div class="area-card">
+      <div class="area-card-head">
+        <h3 class="area-card-name">Greater Chennai Corporation</h3>
+        <span class="area-card-district">Chennai District</span>
+      </div>
+      <p class="area-card-dept">Zone 11 &middot; Valasaravakkam</p>
+      <div class="area-card-localities">
+        <span class="locality-tag">Vanagaram</span>
+        <span class="locality-tag">Andal Nagar</span>
+        <span class="locality-tag">Masilamani Street</span>
+      </div>
+      <div class="area-card-stat"><span class="area-card-num">1</span> petition filed</div>
+    </div>
+
+    <div class="area-card statewide">
+      <div class="area-card-head">
+        <h3 class="area-card-name">Statewide channels</h3>
+        <span class="area-card-district">Used alongside local filings</span>
+      </div>
+      <p class="area-card-dept">Escalation routes when a local body doesn&rsquo;t respond</p>
+      <div class="area-card-localities">
+        <span class="locality-tag">TNPCB</span>
+        <span class="locality-tag">TN Local Bodies Ombudsman</span>
+        <span class="locality-tag">RTI Online Tamil Nadu</span>
+      </div>
+      <div class="area-card-stat"><span class="area-card-num">2</span> filings</div>
+    </div>
   </div>
 
   <p class="section-label">Records, newest first</p>
