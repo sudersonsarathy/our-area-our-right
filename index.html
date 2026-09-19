@@ -342,6 +342,28 @@
   .pill.drafted { color: var(--status-drafted-fg); background: var(--status-drafted-bg); }
   .pill.critical { color: var(--status-critical-fg); background: var(--status-critical-bg); }
 
+  .status-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+  }
+
+  .stale-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--status-critical-bg);
+    color: var(--status-critical-fg);
+    font-size: 12px;
+    font-weight: 700;
+    flex: none;
+    cursor: help;
+  }
+
   .record-meta {
     display: flex;
     flex-wrap: wrap;
@@ -698,6 +720,7 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18895931</div>
+    <div class="onground"><b>Update (19 Sep):</b> #Appeal posted after 24 days with no reply, no Reason For Acceptance, and no action &mdash; demanding a firm, time-bound plan for the name boards and an explanation for the delay.</div>
     <button class="expand-btn" type="button" data-record="11" aria-expanded="false">Show full complaint text</button>
     <div class="petition-panel" id="petition-11" hidden></div>
   </div>
@@ -740,10 +763,11 @@
         <div class="record-no">No. 08 &middot; 17 Aug 2026</div>
         <h2 class="record-title">Uncleared garbage &mdash; Poolakshmi St &amp; MSG Road, Susai Nagar</h2>
       </div>
-      <span class="pill received">Filed</span>
+      <span class="pill pending">Pending Action</span>
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Dept:</b> Municipal Admin &amp; Water Supply</div>
     <div class="record-ref">Grievance ID #18779567</div>
+    <div class="onground"><b>Update (19 Sep):</b> #Appeal posted after 33 days with no reply, no Reason For Acceptance, and no action &mdash; demanded clearance, confirmation of action against the erring officer/establishment, and an explanation for the delay.</div>
     <button class="expand-btn" type="button" data-record="8" aria-expanded="false">Show full complaint text</button>
     <div class="petition-panel" id="petition-8" hidden></div>
   </div>
@@ -759,7 +783,7 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 1 photo</div>
     <div class="record-ref">Grievance ID #18774704</div>
-    <div class="onground"><b>Update (28 Aug):</b> Portal status moved from Received to Accepted.</div>
+    <div class="onground"><b>Update (28 Aug):</b> Portal status moved from Received to Accepted. Reason given: road resurfacing deferred until after Thiruverkadu's Rs 429.55 crore sewerage scheme (3 yrs) and Rs 165.48 crore drinking water scheme (2 yrs) are complete. <b>#Appeal posted 19 Sep:</b> objected to a multi-year wait with no interim safety measures; asked for firm ward-wise sequencing and completion dates.</div>
     <button class="expand-btn" type="button" data-record="7" aria-expanded="false">Show full complaint text</button>
     <div class="petition-panel" id="petition-7" hidden></div>
   </div>
@@ -775,7 +799,7 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18772307</div>
-    <div class="onground"><b>Update (15 Sep):</b> Portal status moved from Submitted to Accepted.</div>
+    <div class="onground"><b>Update (15 Sep):</b> Portal status moved from Submitted to Accepted. Reason given: ABC surgery/anti-rabies vaccination carried out this month via Blue Cross Society of India, and removal notices issued to pig owners. <b>#Appeal posted 19 Sep:</b> no confirmation the named streets (1st/2nd Street, Moogambigai Nagar) were actually covered, and no written status update given as originally requested.</div>
     <button class="expand-btn" type="button" data-record="6" aria-expanded="false">Show full complaint text</button>
     <div class="petition-panel" id="petition-6" hidden></div>
   </div>
@@ -819,7 +843,10 @@
         <div class="record-no">No. 03 &middot; 14 Aug 2026</div>
         <h2 class="record-title">Maladministration complaint &mdash; sewer leak, Thiruverkadu</h2>
       </div>
-      <span class="pill drafted">Drafted</span>
+      <div class="status-group">
+        <span class="pill drafted">Drafted</span>
+        <span class="stale-flag" title="36 days since drafted (14 Aug 2026) &mdash; still not confirmed sent, no follow-up">!</span>
+      </div>
     </div>
     <div class="record-meta"><b>Channel:</b> TN Local Bodies Ombudsman (email only) &middot; ombudsmanlocal@tn.gov.in</div>
     <div class="record-ref">No reference yet &mdash; not confirmed sent</div>
@@ -834,7 +861,10 @@
         <div class="record-no">No. 02 &middot; 14 Aug 2026</div>
         <h2 class="record-title">Water pollution &mdash; sewage stagnating on public road</h2>
       </div>
-      <span class="pill received">Filed</span>
+      <div class="status-group">
+        <span class="pill received">Filed</span>
+        <span class="stale-flag" title="36 days since filed (14 Aug 2026) &mdash; no RTI or follow-up escalation yet, status never re-checked">!</span>
+      </div>
     </div>
     <div class="record-meta"><b>Portal:</b> Tamil Nadu Pollution Control Board &middot; Poolakshmi Street, Susai Nagar, Noombal</div>
     <div class="record-ref">Complaint ID 142656429</div>
@@ -894,7 +924,7 @@
         }
 
         var text = (window.PETITION_TEXTS || {})[id];
-        panel.textContent = text || 'Full text not available for this entry.';
+        panel.innerHTML = text || 'Full text not available for this entry.';
         panel.hidden = false;
         btn.setAttribute('aria-expanded', 'true');
         btn.textContent = 'Hide full complaint text';
