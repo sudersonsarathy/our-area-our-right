@@ -369,21 +369,45 @@
   }
   .onground b { color: var(--brass); }
 
-  details {
+  .expand-btn {
     margin-top: 12px;
-  }
-  summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     cursor: pointer;
+    font-family: inherit;
     font-size: 12.5px;
     color: var(--navy);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
+    background: none;
+    border: none;
+    padding: 0;
   }
-  summary:focus-visible, a:focus-visible {
+  .expand-btn::before {
+    content: "\25B8";
+    font-size: 11px;
+    transition: transform 0.15s ease;
+  }
+  .expand-btn[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+  }
+  .expand-btn:focus-visible, a:focus-visible {
     outline: 2px solid var(--navy);
     outline-offset: 2px;
   }
+  .petition-panel {
+    margin-top: 10px;
+    padding: 12px 14px;
+    background: var(--navy-soft);
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 65ch;
+    white-space: pre-wrap;
+  }
+  .petition-panel[hidden] { display: none; }
   .petition-text {
     margin-top: 10px;
     font-size: 14px;
@@ -521,6 +545,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Energy Department (TANGEDCO), Village Panchayat Kattupakkam</div>
     <div class="record-ref">Grievance ID #19099064</div>
     <div class="onground"><b>Update (17 Sep):</b> Filed after repeated, prolonged power cuts went unresolved via the TANGEDCO 1912 helpline. Also escalated in parallel to TANGEDCO CGRF citing TNERC standards-of-performance compensation for the delay.</div>
+    <button class="expand-btn" type="button" data-record="21" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-21" hidden></div>
   </div>
 
   <!-- 20 -->
@@ -534,7 +560,9 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Greater Chennai Corporation, Zone 11 (Valasaravakkam) &middot; <b>Attachments:</b> 3 photos</div>
     <div class="record-ref">Grievance ID #19090319</div>
-    <div class="onground"><b>Update (16 Sep):</b> Portal status moved from Received to Accepted. Routing resolved live &mdash; GCC&rsquo;s own citizen portal doesn&rsquo;t list this locality by name, but CM Helpline&rsquo;s routing engine does, under the erstwhile Vanagaram panchayat absorbed into Zone 11.</div>
+    <div class="onground"><b>Update (16 Sep):</b> Portal status moved from Received to Accepted. Routing resolved live &mdash; GCC&rsquo;s own citizen portal doesn&rsquo;t list this locality by name, but CM Helpline&rsquo;s routing engine does, under the erstwhile Vanagaram panchayat absorbed into Zone 11. Officer&rsquo;s reason for acceptance: &ldquo;Road cut work after tender will be done.&rdquo;</div>
+    <button class="expand-btn" type="button" data-record="20" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-20" hidden></div>
   </div>
 
   <!-- 19 -->
@@ -549,6 +577,8 @@
     <div class="record-meta"><b>Portal:</b> RTI Online Tamil Nadu &middot; <b>Filed with:</b> Block Development Office (Panchayat), Poonamallee &middot; <b>Fee:</b> Rs 10 paid</div>
     <div class="record-ref">Registration No. QZRGG/R/2026/60006 &middot; cites Grievance #18812981</div>
     <div class="onground"><b>Update (15 Sep):</b> Seeks 5-year audited financials, ward-wise scheme works, MGNREGA muster rolls, and utilization certificates, plus the full garbage collection contract, ward-wise vehicles, EV/Swachh Bharat vehicle counts, worker attendance, materials issued, wages, and penalty history &mdash; since collection is happening only once every 2 days on the ground. Reply due within 30 days, by approx. 15-Oct-2026.</div>
+    <button class="expand-btn" type="button" data-record="19" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-19" hidden></div>
   </div>
 
   <!-- 18 -->
@@ -563,6 +593,8 @@
     <div class="record-meta"><b>Portal:</b> RTI Online Tamil Nadu &middot; <b>Filed with:</b> Block Development Office (Panchayat), Poonamallee &middot; <b>Fee:</b> Rs 10 paid</div>
     <div class="record-ref">Registration No. QZRGG/R/2026/60005 &middot; cites Grievance #17638563 &amp; #18769965</div>
     <div class="onground"><b>Update (15 Sep):</b> An appeal was also posted directly on Grievance #17638563, citing the vague acceptance reply (register entry only, no sanctioned funds or timeline) and no ground action to date. RTI reply due within 30 days, by approx. 15-Oct-2026.</div>
+    <button class="expand-btn" type="button" data-record="18" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-18" hidden></div>
   </div>
 
   <!-- 17 -->
@@ -576,6 +608,8 @@
     </div>
     <div class="record-meta"><b>Channel:</b> Direct resident escalation, no portal filing needed &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Reported by:</b> a resident, Soosaiya Nagar</div>
     <div class="onground"><b>Update (13 Sep):</b> Reported directly to the premises staff and to a neighbour, who called and had the leak cleared the same morning &mdash; no formal CM Helpline complaint required.</div>
+    <button class="expand-btn" type="button" data-record="17" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-17" hidden></div>
   </div>
 
   <!-- 16 -->
@@ -589,7 +623,7 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 1 PDF (4 RTI replies of Thiruverkadu Municipality)</div>
     <div class="record-ref">Grievance ID #19075234</div>
-    <div class="onground"><b>Update (19 Sep):</b> Portal status moved from Pending Action to Accepted, Reference No. 54/2024/E2 assigned. Same generic reference number also appears on the unrelated Poolakshmi Street drainage ticket (#18764409 below) &mdash; looks like a register-entry stamp, not confirmation that relocation or resident consultation will actually happen.</div>
+    <div class="onground"><b>Update (19 Sep):</b> Portal status moved from Pending Action to Accepted. The officer's reply is real and substantive, not boilerplate &mdash; and unfavourable: the Municipality states 6 sewage Pumping Stations, including this one, are being sited on park (OSR) land townwide because no government wasteland is available, with no relocation offered and no resident consultation promised.</div>
   </div>
 
   <!-- 15 -->
@@ -603,6 +637,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu</div>
     <div class="record-ref">Grievance ID #18987432</div>
+    <button class="expand-btn" type="button" data-record="15" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-15" hidden></div>
   </div>
 
   <!-- 14 -->
@@ -616,6 +652,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Iyyapanthangal Village Panchayat</div>
     <div class="record-ref">Grievance ID #18932978</div>
+    <button class="expand-btn" type="button" data-record="14" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-14" hidden></div>
   </div>
 
   <!-- 13 -->
@@ -629,6 +667,9 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18932861</div>
+    <div class="onground"><b>Update (19 Sep):</b> This grievance ID does not appear anywhere in the filing account's own ticket list, and its ticket link returns &ldquo;Insufficient Privileges.&rdquo; Unconfirmed whether this was actually filed under this login.</div>
+    <button class="expand-btn" type="button" data-record="13" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-13" hidden></div>
   </div>
 
   <!-- 12 -->
@@ -642,6 +683,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18896113</div>
+    <button class="expand-btn" type="button" data-record="12" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-12" hidden></div>
   </div>
 
   <!-- 11 -->
@@ -655,6 +698,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18895931</div>
+    <button class="expand-btn" type="button" data-record="11" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-11" hidden></div>
   </div>
 
   <!-- 10 -->
@@ -668,6 +713,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> Email &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">N/A - email complaint (no reference number issued)</div>
+    <button class="expand-btn" type="button" data-record="10" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-10" hidden></div>
   </div>
 
   <!-- 9 -->
@@ -682,10 +729,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Kattupakkam Village Panchayat &middot; <b>Dept:</b> Rural Development &amp; Panchayat Raj</div>
     <div class="record-ref">Grievance ID #18812981</div>
     <div class="onground"><b>Update (12 Sep):</b> Portal status moved from Received to Accepted &mdash; consistent with the Poonamallee BDO's office confirming by phone on 19-Aug that the waste was cleared.</div>
-    <details>
-      <summary>Petition text</summary>
-      <p class="petition-text">Solid waste has been left uncollected for weeks at Sri Devi Nagar, Kattupakkam Village Panchayat, causing unhygienic conditions and health hazards to residents. This is a public nuisance under Sections 270 and 279 of the Bharatiya Nyaya Sanhita 2023, and waste management within the panchayat is a statutory duty under the Tamil Nadu Panchayats Act 1994. We request the Block Development Officer to arrange immediate clearance and regular collection within 7 days of this petition.</p>
-    </details>
+    <button class="expand-btn" type="button" data-record="9" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-9" hidden></div>
   </div>
 
   <!-- 8 -->
@@ -699,10 +744,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Dept:</b> Municipal Admin &amp; Water Supply</div>
     <div class="record-ref">Grievance ID #18779567</div>
-    <details>
-      <summary>Petition text</summary>
-      <p class="petition-text">Garbage has been left uncleared for over two weeks on Poolakshmi Street and MSG Road, Susai Nagar, Thiruverkadu, causing foul odour and health hazards to residents. This is a public nuisance under Sections 270 and 279 of the Bharatiya Nyaya Sanhita 2023, and street cleanliness/waste management within municipal limits is a statutory duty of the Municipal Council under Section 162 of the Tamil Nadu District Municipalities Act 1920. We request the Commissioner, Thiruverkadu Municipality, to arrange immediate clearance and regular collection within 7 days of this petition.</p>
-    </details>
+    <button class="expand-btn" type="button" data-record="8" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-8" hidden></div>
   </div>
 
   <!-- 7 -->
@@ -717,10 +760,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 1 photo</div>
     <div class="record-ref">Grievance ID #18774704</div>
     <div class="onground"><b>Update (28 Aug):</b> Portal status moved from Received to Accepted.</div>
-    <details>
-      <summary>Petition text</summary>
-      <p class="petition-text">The roads at Judges Colony Link Road and 2nd Road, under Thiruverkadu Municipality, have remained in a severely damaged condition for over a year, causing continuous hardship and safety risk to residents. Despite the passage of significant time, no Municipal Engineer has visited the site to assess or initiate repair works. Under the Tamil Nadu District Municipalities Act 1920, Section 61, these streets vest in the Municipal Council, and Section 162 casts a clear statutory duty on the Council to maintain and repair such streets. The continued neglect also raises public safety concerns actionable under Sections 270, 279 and 280 of the Bharatiya Nyaya Sanhita 2023. We request the Commissioner, Thiruverkadu Municipality, to depute Engineering staff for immediate inspection and to undertake time-bound restoration of both roads within 30 days of this petition.</p>
-    </details>
+    <button class="expand-btn" type="button" data-record="7" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-7" hidden></div>
   </div>
 
   <!-- 6 -->
@@ -735,6 +776,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality</div>
     <div class="record-ref">Grievance ID #18772307</div>
     <div class="onground"><b>Update (15 Sep):</b> Portal status moved from Submitted to Accepted.</div>
+    <button class="expand-btn" type="button" data-record="6" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-6" hidden></div>
   </div>
 
   <!-- 5 -->
@@ -749,7 +792,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Kattupakkam Village Panchayat &middot; <b>Dept:</b> Rural Development &amp; Panchayat Raj</div>
     <div class="record-ref">Grievance ID #18769965 &middot; cites unresolved #17638563</div>
     <div class="onground"><b>Update (12 Sep):</b> Portal status moved to Accepted &mdash; consistent with the Panchayat official's 28-Aug call confirming measurements taken for road laying.</div>
-    <p class="petition-text" style="margin-top:10px;">Escalation citing five-plus years of disrepair and inaction by the local Ward Councillor / Panchayat President on the original grievance below.</p>
+    <button class="expand-btn" type="button" data-record="5" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-5" hidden></div>
   </div>
 
   <!-- 4 -->
@@ -764,6 +808,8 @@
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; Originally filed before this ledger began</div>
     <div class="record-ref">Grievance ID #17638563</div>
     <div class="onground"><b>Update (16 Sep):</b> Portal status moved back from Accepted to Pending Action &mdash; consistent with an appeal filed on 15-Sep-2026 challenging the vague acceptance reply. Still not confirmed fixed on-ground.</div>
+    <button class="expand-btn" type="button" data-record="4" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-4" hidden></div>
   </div>
 
   <!-- 3 -->
@@ -777,7 +823,8 @@
     </div>
     <div class="record-meta"><b>Channel:</b> TN Local Bodies Ombudsman (email only) &middot; ombudsmanlocal@tn.gov.in</div>
     <div class="record-ref">No reference yet &mdash; not confirmed sent</div>
-    <p class="petition-text" style="margin-top:10px;">Cross-cites Grievance #18764409 and TNPCB Complaint 142656429.</p>
+    <button class="expand-btn" type="button" data-record="3" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-3" hidden></div>
   </div>
 
   <!-- 2 -->
@@ -791,6 +838,8 @@
     </div>
     <div class="record-meta"><b>Portal:</b> Tamil Nadu Pollution Control Board &middot; Poolakshmi Street, Susai Nagar, Noombal</div>
     <div class="record-ref">Complaint ID 142656429</div>
+    <button class="expand-btn" type="button" data-record="2" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-2" hidden></div>
   </div>
 
   <!-- 1 -->
@@ -804,7 +853,9 @@
     </div>
     <div class="record-meta"><b>Portal:</b> CM Helpline &middot; <b>Local body:</b> Thiruverkadu Municipality &middot; <b>Attachments:</b> 2 photos + 1 video</div>
     <div class="record-ref">Grievance ID #18764409</div>
-    <div class="onground"><b>Update (19 Sep):</b> Portal status moved from Pending Action to Accepted, Reference No. 54/2024/E2 assigned &mdash; same generic reference number as entry No. 16, so treat as a register-entry stamp, not confirmed ground action.</div>
+    <div class="onground"><b>Update (19 Sep):</b> Portal status moved from Pending Action to Accepted, with a real commitment: tenders were called on 29-Sep-2026 for two storm-water drain-cover works (Ward 1-9 and Ward 10-18) worth Rs 24.50 lakh; work orders to follow once tenders are received.</div>
+    <button class="expand-btn" type="button" data-record="1" aria-expanded="false">Show full complaint text</button>
+    <div class="petition-panel" id="petition-1" hidden></div>
   </div>
 
   <footer>
@@ -812,3 +863,44 @@
   </footer>
 
 </div>
+
+<script src="petition-texts.js"></script>
+<script>
+  (function () {
+    var openPanel = null;
+    var openBtn = null;
+
+    document.querySelectorAll('.expand-btn').forEach(function (btn) {
+      var id = btn.getAttribute('data-record');
+      var panel = document.getElementById('petition-' + id);
+      if (!panel) return;
+
+      btn.addEventListener('click', function () {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        if (openPanel && openPanel !== panel) {
+          openPanel.hidden = true;
+          openBtn.setAttribute('aria-expanded', 'false');
+          openBtn.textContent = 'Show full complaint text';
+        }
+
+        if (isOpen) {
+          panel.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = 'Show full complaint text';
+          openPanel = null;
+          openBtn = null;
+          return;
+        }
+
+        var text = (window.PETITION_TEXTS || {})[id];
+        panel.textContent = text || 'Full text not available for this entry.';
+        panel.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = 'Hide full complaint text';
+        openPanel = panel;
+        openBtn = btn;
+      });
+    });
+  })();
+</script>
