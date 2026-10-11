@@ -145,6 +145,50 @@
     line-height: 1.6;
   }
 
+  .file-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: var(--navy-soft);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--navy);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+
+  .file-cta-title {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0 0 4px;
+  }
+
+  .file-cta-sub {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .file-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .file-cta-btn:hover { opacity: 0.92; }
+
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -469,6 +513,16 @@
     <div class="masthead-meta">
       Last checked<br>03&nbsp;Oct&nbsp;2026</div>
   </header>
+
+  <div class="file-cta">
+    <div>
+      <h2 class="file-cta-title">Got a civic issue of your own?</h2>
+      <p class="file-cta-sub">Road, drainage, water, garbage, streetlight or anything similar in your
+        area - fill in a short form and we'll file it with the government for you. You approve the exact
+        wording before anything is actually submitted.</p>
+    </div>
+    <a class="file-cta-btn" href="file-complaint.html">File a complaint &rarr;</a>
+  </div>
 
   <div class="stats">
     <div class="stat"><div class="stat-num">29</div><div class="stat-label">Total filed</div></div>
