@@ -10,5 +10,6 @@
   "complainantAddress": "Perumal Koil Street Noombal",
   "reporter": "Mohan",
   "phone": "9840258979",
-  "hasPhoto": false
+  "hasPhoto": false,
+  "claimed_by_chat_id": 1329353212
 }
