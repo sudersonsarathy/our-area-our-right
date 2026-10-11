@@ -354,6 +354,8 @@
       everything (drafting, the OTP step, filing) happens automatically - you won't need to retype
       anything.</p>
     <a class="btn btn-primary" id="claimBtn" href="#" target="_blank" rel="noopener" style="margin-top:14px;">Confirm on Telegram</a>
+    <p class="hint" style="margin-top:8px;">If the button doesn't open Telegram with the message ready, send
+      this to the bot yourself: <strong id="claimCodeText"></strong></p>
     <p class="note" id="autoPhotoNote">Since you said you have a photo/video: the website can't attach one
       yet, so this will be filed without it - message Suderson directly if it's important to add.</p>
     <p class="note">What you submitted:</p>
@@ -481,10 +483,11 @@
         return res.json();
       })
       .then(function (data) {
-        if (!data || !data.id) throw new Error("no id returned");
+        if (!data || !data.id || !data.pin) throw new Error("no id/pin returned");
         document.getElementById("autoResultText").textContent = text;
-        document.getElementById("claimBtn").href =
-          "https://t.me/" + BOT_USERNAME + "?text=" + encodeURIComponent("CLAIM " + data.id);
+        var claimText = "CLAIM " + data.id + " " + data.pin;
+        document.getElementById("claimBtn").href = "https://t.me/" + BOT_USERNAME + "?text=" + encodeURIComponent(claimText);
+        document.getElementById("claimCodeText").textContent = claimText;
         document.getElementById("autoPhotoNote").style.display = hasPhoto ? "block" : "none";
         showCard("autoCard");
       })
