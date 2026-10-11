@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File a complaint - Our Area Our Rights</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --paper: #EEF1EE;
+    --paper-raised: #FFFFFF;
+    --ink: #1A2420;
+    --ink-soft: #4E5A55;
+    --ink-faint: #7B8580;
+    --line: #D3D9D4;
+    --navy: #1F3A5F;
+    --navy-soft: #E4EAF1;
+    --brass: #8C6A26;
+    --brass-soft: #F1E7D0;
+    --status-critical-fg: #8C2A1B;
+    --status-critical-bg: #F5DCD5;
+    --status-received-fg: #1F5C52;
+    --status-received-bg: #DCEEE9;
+    --shadow: 0 1px 2px rgba(26,36,32,0.06), 0 1px 1px rgba(26,36,32,0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12181A;
+      --paper-raised: #1B2225;
+      --ink: #E7EAE6;
+      --ink-soft: #ABB5AF;
+      --ink-faint: #7A847E;
+      --line: #2E3735;
+      --navy: #8FB2DA;
+      --navy-soft: #223244;
+      --brass: #D9B36A;
+      --brass-soft: #3A311E;
+      --status-critical-fg: #E4897A;
+      --status-critical-bg: #3A1D17;
+      --status-received-fg: #6FCBB9;
+      --status-received-bg: #17322C;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.24);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #12181A;
+    --paper-raised: #1B2225;
+    --ink: #E7EAE6;
+    --ink-soft: #ABB5AF;
+    --ink-faint: #7A847E;
+    --line: #2E3735;
+    --navy: #8FB2DA;
+    --navy-soft: #223244;
+    --brass: #D9B36A;
+    --brass-soft: #3A311E;
+    --status-critical-fg: #E4897A;
+    --status-critical-bg: #3A1D17;
+    --status-received-fg: #6FCBB9;
+    --status-received-bg: #17322C;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.24);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--navy); }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 16px 80px;
+  }
+
+  header.masthead {
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .masthead-title {
+    font-family: "Zilla Slab", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(26px, 6vw, 34px);
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .masthead-title img { height: 30px; width: 30px; }
+
+  .masthead-sub {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 56ch;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    margin-bottom: 14px;
+    text-decoration: none;
+  }
+
+  fieldset {
+    border: 0;
+    margin: 0 0 20px;
+    padding: 0;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  label .req { color: var(--status-critical-fg); }
+  label .opt { color: var(--ink-faint); font-weight: 400; }
+
+  .hint {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin: 4px 0 0;
+  }
+
+  input[type="text"], input[type="tel"], select, textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 15px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper-raised);
+    color: var(--ink);
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--navy);
+    outline-offset: 1px;
+  }
+  input.invalid, select.invalid, textarea.invalid {
+    border-color: var(--status-critical-fg);
+  }
+
+  textarea { resize: vertical; min-height: 90px; }
+  #description { min-height: 120px; }
+
+  .field { margin-bottom: 18px; }
+
+  .error-text {
+    display: none;
+    font-size: 12.5px;
+    color: var(--status-critical-fg);
+    margin-top: 4px;
+  }
+  .field.show-error .error-text { display: block; }
+  .field.show-error input, .field.show-error select, .field.show-error textarea {
+    border-color: var(--status-critical-fg);
+  }
+
+  .other-type-wrap { display: none; margin-top: 10px; }
+  .other-type-wrap.show { display: block; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 20px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: #fff;
+  }
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-secondary {
+    background: var(--paper-raised);
+    color: var(--ink);
+    border-color: var(--line);
+    margin-top: 10px;
+  }
+
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .result-card {
+    margin-top: 24px;
+    display: none;
+  }
+  .result-card.show { display: block; }
+
+  .result-card pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    background: var(--navy-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0 0;
+  }
+
+  .note {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--brass-soft);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+
+  .copied-flag {
+    font-size: 12.5px;
+    color: var(--status-received-fg);
+    margin-left: 4px;
+    display: none;
+  }
+  .copied-flag.show { display: inline; }
+
+  footer.page-footer {
+    margin-top: 36px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="index.html">&larr; Back to complaints dashboard</a>
+
+  <header class="masthead">
+    <h1 class="masthead-title"><img src="fist-icon.png" alt="">File a complaint</h1>
+    <p class="masthead-sub">Fill this in once - it builds the exact message our Telegram bot needs, so you
+      don't have to type the format yourself. Nothing is filed with the government until you send the
+      message in Telegram and reply APPROVE to the draft the bot shows you.</p>
+  </header>
+
+  <form id="complaint-form" novalidate>
+    <div class="card">
+
+      <div class="field" id="field-issueType">
+        <label for="issueType">Issue type <span class="req">*</span></label>
+        <select id="issueType">
+          <option value="">Select one&hellip;</option>
+          <option>Road</option>
+          <option>Drainage</option>
+          <option>Water</option>
+          <option>Streetlight</option>
+          <option>Garbage</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="other-type-wrap" id="otherTypeWrap">
+          <input type="text" id="issueTypeOther" placeholder="Describe the issue type">
+        </div>
+        <p class="error-text">Please select or describe the issue type.</p>
+      </div>
+
+      <div class="field" id="field-issueAddress">
+        <label for="issueAddress">Issue address <span class="req">*</span></label>
+        <input type="text" id="issueAddress" placeholder="Street/area name, village or town, pincode">
+        <p class="hint">Where the problem actually is - not necessarily your own address.</p>
+        <p class="error-text">Please enter where the issue is located.</p>
+      </div>
+
+      <div class="field" id="field-localBody">
+        <label for="localBody">Local body <span class="req">*</span></label>
+        <input type="text" id="localBody" list="localBodyOptions" placeholder="e.g. Thiruverkadu Municipality">
+        <datalist id="localBodyOptions">
+          <option value="Thiruverkadu Municipality">
+          <option value="Kattupakkam Village Panchayat">
+          <option value="Iyyapanthangal Village Panchayat">
+          <option value="Greater Chennai Corporation">
+        </datalist>
+        <p class="hint">Panchayat / Municipality / Chennai Corporation / Other Corporation - name it if you know it.</p>
+        <p class="error-text">Please name the Panchayat, Municipality or Corporation.</p>
+      </div>
+
+      <div class="field" id="field-duration">
+        <label for="duration">How long has this been going on? <span class="req">*</span></label>
+        <input type="text" id="duration" placeholder="e.g. Since last month / 2 years">
+        <p class="error-text">Please give a rough duration.</p>
+      </div>
+
+      <div class="field" id="field-description">
+        <label for="description">Description <span class="req">*</span></label>
+        <textarea id="description" placeholder="What's wrong, and why it's a problem for residents"></textarea>
+        <p class="error-text">Please describe the issue.</p>
+      </div>
+
+      <div class="field" id="field-complainantAddress">
+        <label for="complainantAddress">Your (complainant's) address <span class="req">*</span></label>
+        <textarea id="complainantAddress" placeholder="Your full address - needed to file this under your name on the government portal" style="min-height:70px"></textarea>
+        <p class="error-text">Your address is required to file under your name.</p>
+      </div>
+
+      <div class="field" id="field-reporter">
+        <label for="reporter">Reported by (your name) <span class="req">*</span></label>
+        <input type="text" id="reporter" placeholder="Your name">
+        <p class="error-text">Please enter your name.</p>
+      </div>
+
+      <div class="field" id="field-phone">
+        <label for="phone">Phone number <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="10-digit mobile number" inputmode="numeric">
+        <p class="hint">The portal's OTP for filing is sent here - it must be your own number.</p>
+        <p class="error-text">Enter a valid 10-digit Indian mobile number (starts 6-9).</p>
+      </div>
+
+      <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:14px; margin-bottom:0;">
+        <input type="checkbox" id="hasPhoto" style="width:auto;">
+        I have a photo or video to attach
+      </label>
+
+      <button type="submit" class="btn btn-primary" style="margin-top:22px;">Build my complaint message</button>
+    </div>
+  </form>
+
+  <div class="card result-card" id="submittingCard">
+    <strong>Submitting&hellip;</strong>
+  </div>
+
+  <div class="card result-card" id="autoCard">
+    <strong>Your complaint is queued.</strong>
+    <p class="hint" style="margin-top:8px; font-size:14px;">One last step - Telegram only lets our bot
+      message people who've messaged it first, so send this one short confirmation message. After that,
+      everything (drafting, the OTP step, filing) happens automatically - you won't need to retype
+      anything.</p>
+    <a class="btn btn-primary" id="claimBtn" href="#" target="_blank" rel="noopener" style="margin-top:14px;">Confirm on Telegram</a>
+    <p class="note" id="autoPhotoNote">Since you said you have a photo/video: the website can't attach one
+      yet, so this will be filed without it - message Suderson directly if it's important to add.</p>
+    <p class="note">What you submitted:</p>
+    <pre id="autoResultText"></pre>
+  </div>
+
+  <div class="card result-card" id="manualCard">
+    <strong>Your message is ready.</strong>
+    <p class="hint" style="margin-top:8px; font-size:14px;" id="manualFallbackNote">Couldn't reach the
+      automatic queue right now, so use the manual way instead:</p>
+    <pre id="resultText"></pre>
+    <a class="btn btn-primary" id="openTelegramBtn" href="#" target="_blank" rel="noopener" style="margin-top:14px;">Open in Telegram &amp; send</a>
+    <button type="button" class="btn btn-secondary" id="copyBtn">Copy text instead<span class="copied-flag" id="copiedFlag">Copied!</span></button>
+    <p class="note" id="photoNote">Since you said you have a photo/video: after Telegram opens with this
+      message, attach the photo/video to the <em>same</em> message (paperclip icon) before you hit send.</p>
+    <p class="note">Review the message in Telegram before sending - you can edit it there too. The bot will
+      draft the official complaint and show it back to you for approval; nothing is filed until you reply
+      APPROVE.</p>
+  </div>
+
+  <footer class="page-footer">"Our Area, Our Right" &middot; non-partisan civic complaints, any area</footer>
+</div>
+
+<script>
+  var BOT_USERNAME = "cm_cell_our_area_our_right_bot";
+
+  var issueTypeEl = document.getElementById("issueType");
+  var otherTypeWrap = document.getElementById("otherTypeWrap");
+  var issueTypeOtherEl = document.getElementById("issueTypeOther");
+
+  issueTypeEl.addEventListener("change", function () {
+    otherTypeWrap.classList.toggle("show", issueTypeEl.value === "Other");
+  });
+
+  var PHONE_RE = /^(?:\+?91[-\s]?)?[6-9]\d{9}$/;
+
+  function val(id) {
+    return document.getElementById(id).value.trim();
+  }
+
+  function setError(fieldId, hasError) {
+    document.getElementById(fieldId).classList.toggle("show-error", hasError);
+  }
+
+  document.getElementById("complaint-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var issueType = issueTypeEl.value === "Other" ? issueTypeOtherEl.value.trim() : issueTypeEl.value;
+    var issueAddress = val("issueAddress");
+    var localBody = val("localBody");
+    var duration = val("duration");
+    var description = val("description");
+    var complainantAddress = val("complainantAddress");
+    var reporter = val("reporter");
+    var phoneRaw = val("phone");
+    var phoneClean = phoneRaw.replace(/[\s-]/g, "");
+    var hasPhoto = document.getElementById("hasPhoto").checked;
+
+    var ok = true;
+    function check(fieldId, condition) {
+      setError(fieldId, !condition);
+      if (!condition) ok = false;
+    }
+
+    check("field-issueType", !!issueType);
+    check("field-issueAddress", !!issueAddress);
+    check("field-localBody", !!localBody);
+    check("field-duration", !!duration);
+    check("field-description", !!description);
+    check("field-complainantAddress", !!complainantAddress);
+    check("field-reporter", !!reporter);
+    check("field-phone", PHONE_RE.test(phoneClean));
+
+    if (!ok) {
+      document.querySelector(".field.show-error").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    var lines = [
+      "Issue Type : " + issueType,
+      "Issue Address : " + issueAddress,
+      "Local Body : " + localBody,
+      "How long has this been going on? : " + duration,
+      "Description : " + description,
+      "Complainant Address : " + complainantAddress,
+      "Reported by : " + reporter,
+      "Phone Number : " + phoneClean
+    ];
+    var text = lines.join("\n");
+
+    function showCard(id) {
+      ["submittingCard", "autoCard", "manualCard"].forEach(function (cardId) {
+        document.getElementById(cardId).classList.toggle("show", cardId === id);
+      });
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function showManualFallback() {
+      document.getElementById("resultText").textContent = text;
+      document.getElementById("openTelegramBtn").href =
+        "https://t.me/" + BOT_USERNAME + "?text=" + encodeURIComponent(text);
+      document.getElementById("photoNote").style.display = hasPhoto ? "block" : "none";
+      showCard("manualCard");
+    }
+
+    showCard("submittingCard");
+
+    fetch("/api/submit-complaint", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        issueType: issueType,
+        issueAddress: issueAddress,
+        localBody: localBody,
+        duration: duration,
+        description: description,
+        complainantAddress: complainantAddress,
+        reporter: reporter,
+        phone: phoneClean,
+        hasPhoto: hasPhoto
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("queue request failed");
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !data.id) throw new Error("no id returned");
+        document.getElementById("autoResultText").textContent = text;
+        document.getElementById("claimBtn").href =
+          "https://t.me/" + BOT_USERNAME + "?text=" + encodeURIComponent("CLAIM " + data.id);
+        document.getElementById("autoPhotoNote").style.display = hasPhoto ? "block" : "none";
+        showCard("autoCard");
+      })
+      .catch(showManualFallback);
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var text = document.getElementById("resultText").textContent;
+    var flag = document.getElementById("copiedFlag");
+    function show() {
+      flag.classList.add("show");
+      setTimeout(function () { flag.classList.remove("show"); }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(show).catch(show);
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (err) {}
+      document.body.removeChild(ta);
+      show();
+    }
+  });
+</script>
+</body>
+</html>
